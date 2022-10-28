@@ -30,7 +30,7 @@ router
     const result=context.request.body({type:"json"});
     const value = await result.value; 
     //comprueba que no existe ya un coche con la misma matrícula
-    if(value.matricula===db.collection<CocheSchema>("coches").findOne({matricula:value.matricula.toString()})){
+    if(await db.collection<CocheSchema>("coches").findOne({matricula:value.matricula})){
         context.response.status = 400;
         return;
     }else{
